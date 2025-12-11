@@ -54,11 +54,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         pageFlip = new St.PageFlip(bookContainer, {
             width: baseWidth,
             height: baseHeight,
-            size: "stretch",
-            minWidth: 300,
-            maxWidth: 1500,
-            minHeight: 400,
-            maxHeight: 1200,
+            size: "fixed",
+            // minWidth: 300,
+            // maxWidth: 1500,
+            // minHeight: 400,
+            // maxHeight: 1200,
             showCover: true,
             maxShadowOpacity: 0.5
         });
