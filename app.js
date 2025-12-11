@@ -28,8 +28,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Calculate base dimensions keeping the aspect ratio
         // We can set a base height and calculate width from it, or vice versa.
         // Let's stick to a reasonable base height for desktop.
-        const baseHeight = 800;
-        const baseWidth = baseHeight * aspectRatio;
+        // Calculate dimensions to fit screen
+        const padding = 20; // safe area
+        const availableWidth = window.innerWidth - padding;
+        const availableHeight = window.innerHeight - padding;
+
+        // Target height: try to use most of the height
+        let baseHeight = Math.min(800, availableHeight);
+        let baseWidth = baseHeight * aspectRatio;
+
+        // Check if width is too wide for screen
+        if (baseWidth > availableWidth) {
+            baseWidth = availableWidth;
+            baseHeight = baseWidth / aspectRatio;
+        }
 
         console.log(`PDF Dimensions: ${viewport.width}x${viewport.height}, Ratio: ${aspectRatio}`);
         console.log(`Flipbook Dimensions: ${baseWidth}x${baseHeight}`);
