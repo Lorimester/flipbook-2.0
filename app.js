@@ -94,10 +94,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         modeSelector.style.display = 'flex';
 
         btnManual.addEventListener('click', () => {
+            toggleFullScreen();
             modeSelector.style.display = 'none';
         });
 
         btnAuto.addEventListener('click', () => {
+            toggleFullScreen();
             modeSelector.style.display = 'none';
             startAutoFlip(pageFlip, pdfDoc.numPages);
         });
@@ -157,5 +159,13 @@ async function renderPage(num, pdfDoc) {
         await page.render(renderContext).promise;
     } catch (e) {
         console.error("Error rendering page " + num, e);
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch((err) => {
+                console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        }
     }
 }
