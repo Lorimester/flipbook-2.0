@@ -154,3 +154,25 @@ body {
         max-height: 100%;
     }
 }
+
+/* Library Overrides (The Bag of Tricks) */
+.stf__wrapper {
+    perspective: 2000px !important;
+}
+
+.stf__block {
+    transform-style: preserve-3d !important;
+}
+
+.stf__item {
+    backface-visibility: hidden !important;
+    transform-style: flat !important;
+    /* Simplify leaf nodes */
+    transform: translateZ(0);
+    /* Layer promotion */
+}
+
+/* Force active page to stay on top */
+.stf__item.--active {
+    z-index: 50 !important;
+}
