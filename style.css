@@ -154,24 +154,4 @@ body {
     }
 }
 
-/* Library Overrides (The Bag of Tricks) */
-.stf__wrapper {
-    perspective: 2000px !important;
-}
-
-.stf__block {
-    transform-style: preserve-3d !important;
-}
-
-.stf__item {
-    backface-visibility: hidden !important;
-    transform-style: flat !important;
-    /* Simplify leaf nodes */
-    /* Layer promotion */
-    overflow: hidden !important;
-}
-
-/* Force active page to stay on top */
-.stf__item.--active {
-    z-index: 50 !important;
-}
+/* Library Overrides Removed to allow default behavior */
