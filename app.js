@@ -84,6 +84,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         pageFlip.loadFromHTML(document.querySelectorAll('.my-page'));
 
+        // Now render the PDF pages onto the canvases
+        // We render all pages and wait for them to finish before showing the UI
+        const renderPromises = [];
+        for (let i = 1; i <= pdfDoc.numPages; i++) {
+            renderPromises.push(renderPage(i, pdfDoc));
+        }
+
+        await Promise.all(renderPromises);
+        console.log("All pages rendered.");
+
         loading.style.display = 'none';
 
         // Show Mode Selector
@@ -103,14 +113,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             modeSelector.style.display = 'none';
             startAutoFlip(pageFlip, pdfDoc.numPages);
         });
-
-        // Now render the PDF pages onto the canvases
-        // We render them as they are needed? Or all?
-        // Let's render all for simplicity for now, but async.
-
-        for (let i = 1; i <= pdfDoc.numPages; i++) {
-            renderPage(i, pdfDoc);
-        }
 
     } catch (error) {
         console.error('Error loading PDF:', error);
