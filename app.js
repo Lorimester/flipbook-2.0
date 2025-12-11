@@ -34,13 +34,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         const availableHeight = window.innerHeight - padding;
 
         // Target height: try to use most of the height
-        let baseHeight = Math.min(800, availableHeight);
-        let baseWidth = baseHeight * aspectRatio;
+        // Spread Aspect Ratio = (PageWidth * 2) / PageHeight
+        // Page AR = viewport.width / viewport.height
+        const pageAR = viewport.width / viewport.height;
+        const spreadAR = pageAR * 2;
 
-        // Check if width is too wide for screen
-        if (baseWidth > availableWidth) {
-            baseWidth = availableWidth;
-            baseHeight = baseWidth / aspectRatio;
+        console.log(`Page AR: ${pageAR}, Spread AR: ${spreadAR}`);
+
+        // We want to fit a rectangle with aspect ratio 'spreadAR' into 'availableWidth' x 'availableHeight'
+        let baseWidth = availableWidth;
+        let baseHeight = baseWidth / spreadAR;
+
+        if (baseHeight > availableHeight) {
+            baseHeight = availableHeight;
+            baseWidth = baseHeight * spreadAR;
         }
 
         console.log(`PDF Dimensions: ${viewport.width}x${viewport.height}, Ratio: ${aspectRatio}`);
@@ -67,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             width: baseWidth,
             height: baseHeight,
             size: "fixed",
-            // minWidth: 300,
+            usePortrait: false, // FORCE 2-PAGE SPREAD
             // maxWidth: 1500,
             // minHeight: 400,
             // maxHeight: 1200,
