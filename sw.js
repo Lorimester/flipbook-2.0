@@ -1,4 +1,4 @@
-const CACHE_NAME = 'flipbook-v1';
+const CACHE_NAME = 'flipbook-v2';
 const ASSETS = [
     './',
     './index.html',
@@ -6,7 +6,7 @@ const ASSETS = [
     './app.js',
     './manifest.json',
     './icon.jpg',
-    './konyvem.pdf',
+    // './konyvem.pdf', // EXCLUDED: Large file, served from network to avoid range request errors (bad end offset)
     'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
     'https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js'
