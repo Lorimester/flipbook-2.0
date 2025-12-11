@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }));
         }
 
+        // catch individual render errors via the main try/catch block if we rethrow
         await Promise.all(renderPromises);
         console.log("All pages rendered.");
 
@@ -172,6 +173,16 @@ async function renderPage(num, pdfDoc, updateCallback) {
 
     } catch (e) {
         console.error("Error rendering page " + num, e);
+        const loadingText = document.getElementById('loading-text');
+        if (loadingText) {
+            loadingText.textContent = `Hiba a(z) ${num}. oldalon: ${e.message}`;
+            loadingText.style.color = 'red';
+        }
+        // Rethrow to stop Promise.all if we want to block? 
+        // Or just let it show the error.
+        // Let's throw so the main catch block might behave differently, 
+        // OR just rely on the text being red.
+        throw e;
     }
 }
 
