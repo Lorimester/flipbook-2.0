@@ -103,6 +103,8 @@ body {
 .my-page {
     background-color: transparent;
     overflow: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
 }
 
 .my-page canvas {
