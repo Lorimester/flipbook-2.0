@@ -144,6 +144,8 @@ body {
     height: 100%;
     object-fit: contain;
     /* Ensure full page is visible */
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 /* Responsive adjustments */

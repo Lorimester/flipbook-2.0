@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // minHeight: 400,
             // maxHeight: 1200,
             showCover: true,
-            maxShadowOpacity: 0.05
+            maxShadowOpacity: 0
         });
 
         pageFlip.loadFromHTML(document.querySelectorAll('.my-page'));
