@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const url = 'konyvem.pdf';
     const bookContainer = document.getElementById('book');
-    const loading = document.getElementById('loading');
+    const loadingText = document.getElementById('loading-text');
+    const loadingState = document.getElementById('loading-state');
+    const modeSelectionState = document.getElementById('mode-selection-state');
+    const modeSelector = document.getElementById('mode-selector');
 
     let pdfDoc = null;
     let pageFlip = null;
@@ -87,21 +90,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Now render the PDF pages onto the canvases
         // We render all pages and wait for them to finish before showing the UI
         const renderPromises = [];
+        let pagesLoaded = 0;
+
         for (let i = 1; i <= pdfDoc.numPages; i++) {
-            renderPromises.push(renderPage(i, pdfDoc));
+            renderPromises.push(renderPage(i, pdfDoc, () => {
+                pagesLoaded++;
+                loadingText.textContent = `Betöltés... ${pagesLoaded} / ${pdfDoc.numPages}`;
+            }));
         }
 
         await Promise.all(renderPromises);
         console.log("All pages rendered.");
 
-        loading.style.display = 'none';
+        // Switch to Mode Selection
+        loadingState.style.display = 'none';
+        modeSelectionState.style.display = 'block';
 
         // Show Mode Selector
-        const modeSelector = document.getElementById('mode-selector');
         const btnManual = document.getElementById('btn-manual');
         const btnAuto = document.getElementById('btn-auto');
-
-        modeSelector.style.display = 'flex';
 
         btnManual.addEventListener('click', () => {
             toggleFullScreen();
@@ -116,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (error) {
         console.error('Error loading PDF:', error);
-        loading.textContent = 'Hiba történt a fájl betöltésekor: ' + error.message;
+        loadingText.textContent = 'Hiba történt: ' + error.message;
     }
 });
 
@@ -140,7 +147,7 @@ function startAutoFlip(pageFlip, totalPages) {
     }, 5000);
 }
 
-async function renderPage(num, pdfDoc) {
+async function renderPage(num, pdfDoc, updateCallback) {
     try {
         const page = await pdfDoc.getPage(num);
         const canvas = document.getElementById(`page-${num}`);
@@ -159,6 +166,10 @@ async function renderPage(num, pdfDoc) {
         };
 
         await page.render(renderContext).promise;
+
+        // Update loading text if callback provided
+        if (updateCallback) updateCallback();
+
     } catch (e) {
         console.error("Error rendering page " + num, e);
     }

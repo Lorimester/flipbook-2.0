@@ -21,16 +21,25 @@
 <body>
 
     <div class="container">
-        <!-- New Modal for Mode Selection -->
-        <div id="mode-selector" class="mode-selector" style="display: none;">
+        <!-- Unified Modal for Loading and Mode Selection -->
+        <div id="mode-selector" class="mode-selector">
             <div class="mode-content">
-                <h2>Válassz olvasási módot</h2>
-                <button id="btn-manual" class="mode-btn">Manuális (Én lapozok)</button>
-                <button id="btn-auto" class="mode-btn">Automata (5 mp)</button>
+                <!-- Loading State -->
+                <div id="loading-state">
+                    <div class="spinner"></div>
+                    <h2 id="loading-text">Betöltés...</h2>
+                </div>
+
+                <!-- Mode Selection State (Hidden initially) -->
+                <div id="mode-selection-state" style="display: none;">
+                    <h2>Válassz olvasási módot</h2>
+                    <button id="btn-manual" class="mode-btn">Manuális (Én lapozok)</button>
+                    <button id="btn-auto" class="mode-btn">Automata (5 mp)</button>
+                </div>
             </div>
         </div>
 
-        <div id="loading" class="loading">Könyv betöltése...</div>
+
         <div id="book" class="book">
             <!-- Pages will be rendered here -->
         </div>
