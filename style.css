@@ -104,6 +104,7 @@ body {
     /* Optional: texture */
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
+    transform-style: preserve-3d;
 }
 
 /* Spinner Styles */
@@ -134,6 +135,7 @@ body {
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
     will-change: transform;
+    transform-style: preserve-3d;
 }
 
 .my-page canvas {
