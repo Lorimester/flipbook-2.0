@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Initialize the library
         pageFlip = new St.PageFlip(bookContainer, {
-            width: baseWidth,
+            width: baseWidth / 2,
             height: baseHeight,
             size: "fixed",
             usePortrait: false, // FORCE 2-PAGE SPREAD
