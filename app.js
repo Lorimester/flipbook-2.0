@@ -160,12 +160,12 @@ async function renderPage(num, pdfDoc) {
     } catch (e) {
         console.error("Error rendering page " + num, e);
     }
+}
 
-    function toggleFullScreen() {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch((err) => {
-                console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-            });
-        }
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch((err) => {
+            console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
     }
 }

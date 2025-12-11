@@ -101,7 +101,7 @@ body {
 
 /* Page styles inside the book */
 .my-page {
-    background-color: white;
+    background-color: transparent;
     overflow: hidden;
 }
 
