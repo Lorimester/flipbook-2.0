@@ -130,12 +130,11 @@ body {
 
 /* Page styles inside the book */
 .my-page {
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.01);
+    /* Hack to force compositing */
     overflow: hidden;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
-    /* will-change removed to prevent rendering glitches */
-    isolation: isolate;
 }
 
 .my-page canvas {
@@ -168,8 +167,8 @@ body {
     backface-visibility: hidden !important;
     transform-style: flat !important;
     /* Simplify leaf nodes */
-    transform: translateZ(0);
     /* Layer promotion */
+    overflow: hidden !important;
 }
 
 /* Force active page to stay on top */
