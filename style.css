@@ -134,7 +134,8 @@ body {
     overflow: hidden;
     backface-visibility: hidden;
     transform: translate3d(0, 0, 0);
-    will-change: transform;
+    /* will-change removed to prevent rendering glitches */
+    isolation: isolate;
 }
 
 .my-page canvas {
@@ -143,7 +144,6 @@ body {
     height: 100%;
     object-fit: contain;
     /* Ensure full page is visible */
-    transform: translateZ(0);
     backface-visibility: hidden;
 }
 
